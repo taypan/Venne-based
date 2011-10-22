@@ -44,9 +44,7 @@ common:
 		name: ""
 		password: ""
 
-	modules:
-		pages:
-			routePrefix: ""
+	modules: []
 
 
 	macros:
