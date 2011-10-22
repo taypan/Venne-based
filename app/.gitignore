@@ -1,7 +1,0 @@
-*
-!.*
-!proxies/
-!proxies/*
-!config.neon
-!web.config
-!bootstrap.php 
