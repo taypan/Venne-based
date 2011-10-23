@@ -1,7 +1,8 @@
 #!/bin/bash
 
 DIR="$(dirname "$(readlink -f "$0")")/.."
-VENDORS_DIR="$DIR/libs-all"
+VENDORS="libs-all"
+VENDORS_DIR="$DIR/$VENDORS"
 LIBS_DIR="$DIR/libs"
 
 mkdir $VENDORS_DIR
@@ -37,19 +38,17 @@ install_git()
 
 # Nette Framework
 install_git nette git://github.com/nette/nette.git 419443f3d5a6fde0607580f7b3dcc9987a51f1a0
-ln -s "$VENDORS_DIR/nette/Nette" "$LIBS_DIR/Nette" 
+ln -s "../$VENDORS/nette/Nette" "$LIBS_DIR/Nette"
 
 
 # Venne:CMS
 install_git venne git://github.com/Venne/Venne-CMS.git
-ln -s "$VENDORS_DIR/venne/Venne" "$LIBS_DIR/Venne"
-ln -s "$VENDORS_DIR/venne/App" "$LIBS_DIR/App"
+ln -s "../$VENDORS/venne/Venne" "$LIBS_DIR/Venne"
+ln -s "../$VENDORS/venne/App" "$LIBS_DIR/App"
 
 # Doctrine
 install_git doctrine git://github.com/doctrine/doctrine2.git 2.1.2
 cd "$VENDORS_DIR/doctrine"
 git submodule init
 git submodule update
-ln -s "$VENDORS_DIR/doctrine/lib" "$LIBS_DIR/Doctrine"
-
-
+ln -s "../$VENDORS/doctrine/lib" "$LIBS_DIR/Doctrine"
