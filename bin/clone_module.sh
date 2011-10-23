@@ -29,7 +29,7 @@ install_git()
 }
 
 if [ ! -z "$1" ]; then
-	install_git $1 "git@github.com:Venne/$1.git"
+	install_git $1 "git://github.com/Venne/$1.git"
 fi
 
 
