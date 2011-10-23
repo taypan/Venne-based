@@ -4,6 +4,7 @@ DIR="$(dirname "$(readlink -f "$0")")/.."
 VENDORS="libs-all"
 VENDORS_DIR="$DIR/$VENDORS"
 LIBS_DIR="$DIR/libs"
+WWW_DIR="$DIR/www"
 
 mkdir $VENDORS_DIR
 cd $VENDORS_DIR
@@ -52,3 +53,4 @@ cd "$VENDORS_DIR/doctrine"
 git submodule init
 git submodule update
 ln -s "../$VENDORS/doctrine/lib" "$LIBS_DIR/Doctrine"
+
