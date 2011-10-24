@@ -14,7 +14,7 @@ namespace AdminTheme;
 /**
  * @author Josef Kříž
  */
-class Theme extends \Venne\Developer\Theme\BaseTheme {
+class Theme extends \Venne\Templating\Theme {
 
 
 	public function getName()

@@ -40,19 +40,12 @@ common:
 		defaultErrorModule: error
 
 	lang: cs
+
 	admin:
 		name: ""
 		password: ""
 
 	modules: []
-
-
-	macros:
-		- js
-		- css
-		- element
-		- confirm
-		- thumb
 
 	repositories:
 		extra:
