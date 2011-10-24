@@ -36,7 +36,7 @@ common:
 		
 	website:
 		theme: venne
-		defaultPresenter: Pages:Page
+		defaultPresenter: Pages:Default
 		defaultErrorModule: error
 
 	lang: cs
