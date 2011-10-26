@@ -56,5 +56,14 @@ class DefaultPresenter extends \Venne\Developer\Presenter\FrontPresenter {
 		$this->setDescription($entity->description);
 		$this->setRobots(self::ROBOTS_INDEX | self::ROBOTS_FOLLOW);
 	}
+	
+	public function actionNotfound()
+	{
+		$this->setTitle($entity->title);
+		$this->setKeywords($entity->keywords);
+		$this->setDescription($entity->description);
+		$this->setRobots(self::ROBOTS_INDEX | self::ROBOTS_FOLLOW);
+	}
+	
 
 }
