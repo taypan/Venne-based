@@ -3,6 +3,12 @@
  * @author Mikulas Dite
  * @copyright Mikulas Dite 2010
  */
+jQuery(document).ready(function() {
+	var basePath = jQuery.venne.getBasePath();
+	
+	$('head').append('<link rel="stylesheet" href="' + basePath + '/css/Forms/Controls/tagInput.css" type="text/css" />');
+}
+
 
 $(function() {
 	var default_delimiter = /[\s,]+/;

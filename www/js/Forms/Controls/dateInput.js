@@ -1,5 +1,5 @@
 /*
- * Author: Ondřej Vodáček <ondrej.vodacek@gamil.com>
+ * Author: Ondřej Vodáček <ondrej.vodacek@gmail.com>
  * License: New BSD License
  *
  * Copyright (c) 2011, Ondřej Vodáček
@@ -156,38 +156,44 @@
 				return object.datetimepicker(settings);
 			},
 			dateFormat: 'yy-mm-dd',
-			timeFormat: 'hh:mm'
+			timeFormat: 'hh:mm',
+			validFormat: '\\d{4}-\\d{2}-\\d{2}'
 		},
 		date: {
 			parseFunction: parseDate,
 			create: function(object, settings) {
 				return object.datepicker(settings);
 			},
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'yy-mm-dd',
+			validFormat: '\\d{4}-\\d{2}-\\d{2}'
 		},
 		month: {
 			parseFunction: parseMonth,
 			create: function(object, settings) {
 				return object.datepicker(settings);
 			},
-			dateFormat: 'yy-mm'
+			dateFormat: 'yy-mm',
+			validFormat: '\\d{4}-\\d{2}'
 		},
 		week: {
 			parseFunction: parseWeek,
 			create: function(object, settings) {
 				return object.datepicker(settings);
 			},
-			dateFormat: 'yy-Www'
+			dateFormat: 'yy-Www',
+			validFormat: '\\d{4}-W\\d{2}'
 		},
 		time: {
 			parseFunction: parseTime,
 			create: function(object, settings) {
 				return object.timepicker(settings);
 			},
-			timeFormat: 'hh:mm'
+			timeFormat: 'hh:mm',
+			validFormat: '\\d{2}:\\d{2}'
 		}
 	};
 	globalSettings['datetime-local'] = globalSettings.datetime;
+	globalSettings['datetime-local'].validFormat += '.*'; // timezone
 
 	$.fn.dateinput = function(userSettings) {
 		this.each(function() {
@@ -199,16 +205,17 @@
 
 			// create alt field
 			this.type = 'text';
-			var alt = t.clone().attr('id', null);
+			var alt = t.clone().removeAttr('id');
 			try {
 				alt.get(0).type = 'hidden';
 			} catch (exception) {
-				// fox for: http://webbugtrack.blogspot.com/2007/09/bug-237-type-is-readonly-attribute-in.html
-				alt = $(alt.get(0).outerHTML.replace(/type=(['"]?)[a-z-]+\1/, 'type="hidden"'));
+				// fix for: http://webbugtrack.blogspot.com/2007/09/bug-237-type-is-readonly-attribute-in.html
+				alt = $(alt.get(0).outerHTML.replace(/ type=(['"]?)[a-z-]+\1/, ' type="hidden"'));
 			}
-			t.attr('name', null);
+			t.removeAttr('name');
 			t.val(null);
 			t.after(alt);
+			t.data('altField', alt);
 
 			var pickerSettings = {};
 
@@ -255,11 +262,11 @@
 								minute: selectedDate.getMinutes(),
 								second: selectedDate.getSeconds()
 							};
+							var value = $.datepicker.formatDate('yy-mm-dd', selectedDate) + 'T' + $.timepicker._formatTime(tp, 'hh:mm:ss', false);
 							if (type == 'datetime') {
-								alt.val($.datepicker.formatDate('yy-mm-dd', selectedDate) + 'T' + $.timepicker._formatTime(tp, 'hh:mm:ss', false) + 'Z');
-							} else {
-								alt.val($.datepicker.formatDate('yy-mm-dd', selectedDate) + 'T' + $.timepicker._formatTime(tp, 'hh:mm:ss', false));
+								value += 'Z';
 							}
+							alt.val(value);
 						}
 					});
 					break;
@@ -359,5 +366,19 @@
 			}
 		});
 		return this;
+	};
+
+	// Nette validators
+	Nette.validators.dateInputValid = function(elem, arg, val) {
+		var el = $(elem);
+		var type = el.attr('data-dateinput-type');
+		var format = globalSettings[type].validFormat;
+		val = el.data('altField').val();
+		return (new RegExp('^(' + format + ')$')).test(val);
+	};
+	Nette.validators.dateInputRange = function(elem, arg, val) {
+		var el = $(elem);
+		val = el.data('altField').val();
+		return Nette.isArray(arg) ? ((arg[0] === null || val >= arg[0]) && (arg[1] === null || val <= arg[1])) : null;
 	};
 })(jQuery);
