@@ -1,5 +1,5 @@
 global:
-	mode: detect
+	mode: development
 	developerIp: null
 	
 common:
