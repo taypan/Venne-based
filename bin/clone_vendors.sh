@@ -52,5 +52,12 @@ install_git doctrine git://github.com/doctrine/doctrine2.git 2.1.2
 cd "$VENDORS_DIR/doctrine"
 git submodule init
 git submodule update
+cd $VENDORS_DIR
 ln -s "../$VENDORS/doctrine/lib" "$LIBS_DIR/Doctrine"
+
+# elRTE
+# install_git elrte git://github.com/Studio-42/elRTE.git stable
+# install_git elfinder git://github.com/Studio-42/elFinder.git 2.x
+# ln -s "../$VENDORS/elrte" "$WWW_DIR/elRTE"
+# ln -s "../$VENDORS/elfinder" "$WWW_DIR/elFinder"
 

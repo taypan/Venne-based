@@ -26,7 +26,7 @@
 {include #body}
 {/capture}
 {element header:html5}
-<body>
+<body{if $basePath} data-venne-basepath="{$basePath}"{/if}>
 {!$body}
 </body>
 </html>
