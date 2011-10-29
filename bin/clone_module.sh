@@ -28,8 +28,13 @@ install_git()
 	fi
 }
 
+if [ -z $2 ]; then
+                $2=venne
+fi
+
+
 if [ ! -z "$1" ]; then
-	install_git $1 "git://github.com/Venne/$1.git"
+	install_git $1 "git://github.com/$2/$1.git"
 fi
 
 
