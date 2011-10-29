@@ -1,3 +1,4 @@
 nbproject/*
 libs-all/*
-
+app/*/*
+tests/*

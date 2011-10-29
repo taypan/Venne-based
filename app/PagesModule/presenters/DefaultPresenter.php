@@ -39,7 +39,7 @@ class DefaultPresenter extends \Venne\Developer\Presenter\FrontPresenter {
 	
 	public function createComponentForm($name)
 	{
-		$form = new \Venne\Modules\PagesFrontForm($this, $name);
+		$form = new \App\PagesModule\PagesFrontForm($this, $name);
 		$form->setSuccessLink("this");
 		$form->setFlashMessage("Page has been updated");
 		return $form;

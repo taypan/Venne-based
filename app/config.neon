@@ -11,7 +11,8 @@ common:
 	services:
 		robotLoader:
 			run: true
-			
+	adminMail:
+		taypan@email.cz		
 		
 	database:
 		driver: pdo_mysql
@@ -38,7 +39,7 @@ common:
 	dataDir: %rootDir%/data
 	website:
 		theme: venne
-		defaultPresenter: Pages:Default
+		defaultPresenter: Register:Default
 		defaultErrorModule: error
 		
 	lang: cs
@@ -51,6 +52,10 @@ common:
 			routePrefix: pages/
 		register:
 			routePrefix: register/
+		contact:
+			routePrefix: contact/
+		calendar:
+			routePrefix: calendar/
 			
 		
 	repositories:
